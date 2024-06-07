@@ -10,6 +10,7 @@ const PORT = 9000;
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
+const moviesRouter = require('./routes/router');
 
 
 app.use(cookieParser());
@@ -17,6 +18,27 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('tiny'));
 
+const movies = require('./models/movies');
+
+const dummyData = [
+    { name: "Inception", price: 100 },
+    { name: "Escape", price: 20 },
+    { name: "TEST", price: 30 }
+];
+
+const initializeDummyData = async () => {
+    try {
+        await movies.deleteMany({});
+        await movies.insertMany(dummyData);
+        console.log('Dummy data has been created!', dummyData);
+    } catch (error) {
+        console.error('Error inserting dummy data:', error);
+    }
+};
+
+initializeDummyData();
+
+app.use('/', moviesRouter);
 
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
@@ -25,6 +47,7 @@ mongoose.connect(process.env.DATABASE_URL, {
   .then(() => {
     server.listen(PORT, () => {
       console.log(`Server running on Port ${PORT}`);
+
     });
   })
   .catch((err) => {
