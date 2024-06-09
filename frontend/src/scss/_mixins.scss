@@ -1,0 +1,29 @@
+@mixin tablet {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin flex-justify($direction, $justify-content) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+}
+
+@mixin flex-align($direction, $align-items) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+}
+
+@mixin flex($direction, $justify-content, $align-items) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}

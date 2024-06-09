@@ -1,3 +1,11 @@
+import { Footer } from "../components/Footer";
+import { Startpage } from "../components/Startpage";
+
 export const Layout = () => {
-  return <h2>Hoppsan, den här sidan verkar inte finnas...</h2>;
+  return (
+    <>
+      <Startpage />
+      <Footer />
+    </>
+  );
 };

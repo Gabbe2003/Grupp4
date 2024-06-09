@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Layout } from "../src/pages/Layout.tsx";
-import { NotFound } from "../src/pages/NotFound.tsx";
-import { Home } from "../src/pages/home.tsx";
-import { PagesLayout } from "../src/pages/PagesLayout.tsx";
-// import { Checkout } from "../src/pages/Checkout.tsx";
-import { Register } from "../src/pages/Register.tsx";
-import { Login } from "../src/pages/Login.tsx";
+import { Layout } from "./pages/Layout.tsx";
+import { NotFound } from "./pages/NotFound.tsx";
+import { Home } from "./pages/home.tsx";
+import { PagesLayout } from "./pages/PagesLayout.tsx";
+import { Checkout } from "./pages/checkout.tsx";
+import { Register } from "./pages/Register.tsx";
+import { Login } from "./pages/Login.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -24,10 +24,10 @@ export const router = createBrowserRouter([
     path: "/pages",
     element: <PagesLayout />,
     children: [
-      //   {
-      //     path: "/pages/Checkout",
-      //     element: <Checkout />,
-      //   },
+      {
+        path: "/pages/Checkout",
+        element: <Checkout />,
+      },
       {
         path: "/pages/Register",
         element: <Register />,

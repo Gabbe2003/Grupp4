@@ -1,3 +1,10 @@
+import { Startpage } from "../components/Startpage.tsx";
+import "../scss/Startpage.scss";
+
 export const Home = () => {
-  return <h2>Hoppsan, den här sidan verkar inte finnas...</h2>;
+  return (
+    <>
+      <Startpage />
+    </>
+  );
 };
