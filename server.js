@@ -19,6 +19,13 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 const movies = require('./models/movies');
+const user = require('./models/user');
+
+const dummyUsers = [
+  {name: 'User1', email: 'test1@gmail.com'},
+  {name: 'User1', email: 'test1@gmail.com'},
+  {name: 'User1', email: 'test1@gmail.com'},
+]
 
 const dummyData = [
     { name: "Inception", price: 100 },
@@ -41,7 +48,26 @@ const initializeDummyData = async () => {
   }
 };
 
+
+
+const createUsersData = async () => {
+  try {
+      const count = await movies.countDocuments({});
+
+      if (count === 0) {
+          await movies.insertMany(dummyUsers);
+          console.log('Users data has been created!', dummyUsers);
+      } else {
+          console.log('Users data already exists. No need to create!',);
+      }
+  } catch (error) {
+      console.error('Error checking or inserting Users data:', error);
+  }
+};
+
 initializeDummyData();
+createUsersData();
+
 
 app.use('/', moviesRouter);
 

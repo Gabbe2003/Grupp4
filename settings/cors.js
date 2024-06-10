@@ -1,6 +1,6 @@
 const allowedOrigins = [
     'https://www.mysite.com',
-    'http://localhost:8000',
+    'http://localhost:9000',
     'http://localhost:5173',
     'http://localhost:3000',
     'http://localhost:5174',

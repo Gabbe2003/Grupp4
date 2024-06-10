@@ -3,3 +3,7 @@ export interface IMovie {
   name: string;
   price: number;
 }
+
+export interface IUser {
+  username: string
+}
