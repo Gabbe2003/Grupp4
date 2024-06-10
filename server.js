@@ -21,9 +21,9 @@ const movies = require('./models/movies');
 const user = require('./models/user');
 
 const dummyUsers = [
-  {name: 'User1', email: 'test1@gmail.com'},
-  {name: 'User1', email: 'test1@gmail.com'},
-  {name: 'User1', email: 'test1@gmail.com'},
+  {name: 'User1', email: 'test1@gmail.com', password:'Test1!'},
+  {name: 'user2', email: 'test2@gmail.com', password:'Test2!'},
+  {name: 'User3', email: 'test3@gmail.com', password:'Test3!'},
 ]
 
 const dummyData = [
@@ -51,10 +51,10 @@ const initializeDummyData = async () => {
 
 const createUsersData = async () => {
   try {
-      const count = await movies.countDocuments({});
+      const count = await user.countDocuments({});
 
       if (count === 0) {
-          await movies.insertMany(dummyUsers);
+          await user.insertMany(dummyUsers);
           console.log('Users data has been created!', dummyUsers);
       } else {
           console.log('Users data already exists. No need to create!',);
