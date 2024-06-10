@@ -3,7 +3,6 @@ const movies = require('../models/movies');
 const getMovieById = async (req,res) => {
 
     const { movieId } = req.params;
-
     try {
         const getOneMovie = await movies.findById(movieId);
         if(!getOneMovie) {
