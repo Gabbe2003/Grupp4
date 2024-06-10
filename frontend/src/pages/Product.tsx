@@ -17,6 +17,7 @@ export const Product = () => {
       });
   }
   console.log(movie);
+  console.log(movie);
   return (
     <>
       <h1>{movie?.name} </h1>
