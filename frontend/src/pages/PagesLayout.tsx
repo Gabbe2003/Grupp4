@@ -1,3 +1,5 @@
+import { Product } from "./Product";
+
 export const PagesLayout = () => {
-  return <h2>Hoppsan, den här sidan verkar inte finnas...</h2>;
+  return <Product />;
 };

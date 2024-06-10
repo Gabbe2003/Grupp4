@@ -1,13 +1,27 @@
+import { IMovie } from "../models/IMovie";
+import { useEffect, useState } from "react";
+import { ProductPresentation } from "./Productpresentation";
+
 export const Startpage = () => {
+  const [movies, setMovies] = useState<IMovie[]>();
+  useEffect(() => {
+    if (!movies) {
+      fetch("http://localhost:9000/getAllMovies")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setMovies(data.data);
+          console.log(data.data);
+        });
+    }
+  }, []);
+
   return (
-    <div className="startpage">
-      <h1>Movies</h1>
-      <div className="movie-list">
-        <div className="movie-item">
-          <h3>movies.title</h3>
-          <p>movie.price</p>
-        </div>
-      </div>
-    </div>
+    <>
+      {movies?.map((movie) => {
+        return <ProductPresentation key={movie._id} movie={movie} />;
+      })}
+    </>
   );
 };
