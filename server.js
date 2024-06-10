@@ -34,7 +34,7 @@ const initializeDummyData = async () => {
           await movies.insertMany(dummyData);
           console.log('Dummy data has been created!', dummyData);
       } else {
-          console.log('Dummy data already exists. No need to create!');
+          console.log('Dummy data already exists. No need to create!',);
       }
   } catch (error) {
       console.error('Error checking or inserting dummy data:', error);
