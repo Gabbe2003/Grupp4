@@ -1,6 +1,51 @@
 @use "_variables" as v;
 @use "_mixins" as m;
+@use "./cart";
+@use "./product";
+@use "./checkoutForm";
+
+.layout-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  @include m.mobile {
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+  }
+
+  .header-container {
+    width: 90%;
+    border: 2px solid black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .movie-container {
+      width: 100%;
+      display: flex;
+      column-gap: 10px;
+      @include m.mobile {
+        flex-direction: column;
+      }
+    }
+
+    .product-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      button {
+        width: 60%;
+      }
+    }
+  }
+}
 .startpage {
+  width: 100%;
   text-align: center;
   padding: 20px;
 }
@@ -16,12 +61,16 @@
 }
 
 .movie-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
   background: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
-  @include m.size(auto, 200px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  @include m.size(auto, 100%);
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
 
   h3 {
     margin: 0 0 10px;

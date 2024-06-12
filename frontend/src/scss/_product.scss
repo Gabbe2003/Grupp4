@@ -1,0 +1,44 @@
+@use "_variables" as v;
+@use "_mixins" as m;
+
+.single-product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .single-product__startpage {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    .single-product__movie-list {
+      @include m.flex-justify(row, center);
+      flex-wrap: wrap;
+      gap: 20px;
+
+      @include m.tablet {
+        gap: 30px;
+      }
+      .single-product__movie-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
+        background: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        @include m.size(auto, 80%);
+        box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+
+        h3 {
+          margin: 0 0 10px;
+        }
+
+        p {
+          margin: 5px 0;
+          color: #555;
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,15 @@
+import { Outlet } from "react-router-dom";
 import { Footer } from "../components/Footer";
-import { Startpage } from "../components/Startpage";
 
 export const Layout = () => {
   return (
     <>
-      <Startpage />
-      <Footer />
+      <main>
+        <Outlet />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

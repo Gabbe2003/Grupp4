@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./pages/Layout.tsx";
 import { NotFound } from "./pages/NotFound.tsx";
 import { Home } from "./pages/Home.tsx";
-import { PagesLayout } from "./pages/PagesLayout.tsx";
 import { Checkout } from "../src/pages/Checkout.tsx";
 import { Register } from "./pages/Register.tsx";
 import { Login } from "./pages/Login.tsx";
 import { Product } from "./pages/Product.tsx";
+import { Thanks } from "./pages/Thanks.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -19,27 +19,25 @@ export const router = createBrowserRouter([
         element: <Home />,
         index: true,
       },
-    ],
-  },
-  {
-    path: "/pages",
-    element: <PagesLayout />,
-    children: [
       {
-        path: "/pages/Checkout",
+        path: "/checkout/",
         element: <Checkout />,
       },
       {
-        path: "/pages/Register",
+        path: "/register",
         element: <Register />,
       },
       {
-        path: "/pages/Login",
+        path: "/login",
         element: <Login />,
       },
       {
-        path: "/pages/Product/:movieId",
+        path: "product/:movieId",
         element: <Product />,
+      },
+      {
+        path: "thanks",
+        element: <Thanks />,
       },
     ],
   },
