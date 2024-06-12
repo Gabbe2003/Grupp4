@@ -21,9 +21,9 @@ const movies = require('./models/movies');
 const user = require('./models/user');
 
 const dummyUsers = [
-  {name: 'User1', email: 'test1@gmail.com', password:'Test1!'},
-  {name: 'user2', email: 'test2@gmail.com', password:'Test2!'},
-  {name: 'User3', email: 'test3@gmail.com', password:'Test3!'},
+  {username: 'User1', email: 'test1@gmail.com', password:'Test1!'},
+  {username: 'user2', email: 'test2@gmail.com', password:'Test2!'},
+  {username: 'User3', email: 'test3@gmail.com', password:'Test3!'},
 ]
 
 const dummyData = [

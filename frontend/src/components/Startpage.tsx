@@ -25,6 +25,10 @@ export const Startpage = () => {
   return (
     <div className="layout-container">
       <div className="header-container">
+        <div className="login-register-container">
+          <a href="/loginUser">Login</a>
+          <a href="/registerUser">Register</a>
+        </div>
         <h1>Movies</h1>
 
         <div className="movie-container">

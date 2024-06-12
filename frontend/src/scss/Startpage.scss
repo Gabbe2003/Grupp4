@@ -14,7 +14,11 @@
     row-gap: 10px;
     align-items: center;
   }
-
+  .login-register-container {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
   .header-container {
     width: 90%;
     border: 2px solid black;

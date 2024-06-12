@@ -24,11 +24,11 @@ export const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: "/register",
+        path: "/registerUser",
         element: <Register />,
       },
       {
-        path: "/login",
+        path: "/loginUser",
         element: <Login />,
       },
       {
