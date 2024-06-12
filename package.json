@@ -11,6 +11,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "stripe": "^15.10.0",
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.5.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
