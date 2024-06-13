@@ -2,7 +2,7 @@ const movies = require('../models/movies');
 
 const getAllMovies = async (req, res) => {
     const page = parseInt(req.query.page) || 1;   
-    const limit = parseInt(req.query.limit) || 5; 
+    const limit = parseInt(req.query.limit) || 6; 
     const skip = (page - 1) * limit; 
 
     try {

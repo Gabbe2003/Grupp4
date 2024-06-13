@@ -33,8 +33,13 @@ export const Product = () => {
         <div className="single-product__startpage">
           <div className="single-product__movie-list">
             <div className="single-product__movie-item">
-              <h3>{movie.name}</h3>
-              <p>{movie.price}</p>
+              <div className="single-product__movie-poster">
+                <img src={movie.img} />
+              </div>
+              <h4>Handling</h4>
+              <p>{movie.desc}</p>
+              <h4>Pris: {movie.price} SEK</h4>
+              <a href="/">Tillbaka till startsidan</a>
             </div>
           </div>
         </div>

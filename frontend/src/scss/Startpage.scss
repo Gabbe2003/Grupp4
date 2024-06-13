@@ -7,13 +7,10 @@
 .layout-container {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  column-gap: 10px;
-  @include m.mobile {
-    flex-direction: column;
-    row-gap: 10px;
-    align-items: center;
-  }
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+
   .login-register-container {
     width: 30%;
     display: flex;
@@ -30,9 +27,12 @@
     .movie-container {
       width: 100%;
       display: flex;
-      column-gap: 10px;
-      @include m.mobile {
-        flex-direction: column;
+      justify-content: space-evenly;
+      flex-direction: column;
+      flex-wrap: wrap;
+      column-gap: 20px;
+      @include m.tablet {
+        flex-direction: row;
       }
     }
 
@@ -42,7 +42,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      button {
+      @include m.tablet {
+        width: 40%;
+      }
+      .product-button {
         width: 60%;
       }
     }
@@ -83,5 +86,11 @@
   p {
     margin: 5px 0;
     color: #555;
+  }
+  .movie-poster {
+    width: 60%;
+    img {
+      width: 100%;
+    }
   }
 }

@@ -3,11 +3,6 @@
     @content;
   }
 }
-@mixin mobile {
-  @media screen and (max-width: 768px) {
-    @content;
-  }
-}
 
 @mixin flex-justify($direction, $justify-content) {
   display: flex;
