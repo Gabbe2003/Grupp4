@@ -6,6 +6,7 @@ const center = {
   lat: 59.330894223871915,
   lng: 17.984108157670534,
 };
+
 const MapComponent: React.FC = () => {
   return (
     <LoadScript googleMapsApiKey="AIzaSyDR5Iu-Xt-jS_GPSTctbksbrD_f6JcTfog">
@@ -13,6 +14,13 @@ const MapComponent: React.FC = () => {
         center={center}
         zoom={16}
         mapContainerClassName="map-container"
+        onLoad={(map) => {
+          new window.google.maps.Marker({
+            position: center,
+            map,
+            title: "Uluru",
+          });
+        }}
       >
         <Marker position={center} />
       </GoogleMap>
