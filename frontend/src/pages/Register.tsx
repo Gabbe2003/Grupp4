@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import '../scss/register.scss';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +43,10 @@ export const Register = () => {
       setError("Passwords do not match!");
       return;
     }
+    if (!registerForm.username || !registerForm.email || !registerForm.password) {
+      setError("Please fill in all fields.");
+      return;
+    }
     try {
       const url = 'http://localhost:9000/registerUser';
       const response = await axios.post(url, registerForm);
@@ -50,19 +54,15 @@ export const Register = () => {
         setUser(response.data);
         setRegisterForm({ username: '', email: '', password: '', confirmPassword: '' });
         alert("Registration successful!");
-        navigate('/Login');
+        navigate('/loginUser');
+      } else {
+        throw new Error(`Registration failed with status: ${response.status}`);
       }
     } catch (error) {
-      console.error(error);
       setError("Failed to register. Please try again later.");
+      console.error(error);
     }
   };
-
-  useEffect(() => {
-    if (!user) {
-      createUser();
-    }
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -71,6 +71,7 @@ export const Register = () => {
       [name]: value
     }));
   };
+  console.log(user);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,9 +101,6 @@ export const Register = () => {
         <button type="submit">Register</button>
       </form>
       {error && <p className="error-message">{error}</p>}
-      {(!registerForm.username || !registerForm.email || !registerForm.password || !registerForm.confirmPassword) && (
-        <p className="required-message">All fields are required.</p>
-      )}
     </div>
   );
 };

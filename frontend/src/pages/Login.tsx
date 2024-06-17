@@ -48,6 +48,7 @@ export const Login = () => {
       setError("Failed to login. Please check your credentials and try again.");
     }
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleGoogleLoginSuccess = async (googleUser: any) => {
     try {
       const profile = googleUser.getBasicProfile();
@@ -62,6 +63,7 @@ export const Login = () => {
         alert("Google Login successful!");
         navigate("/");
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
       setError("Failed to login with Google.");
