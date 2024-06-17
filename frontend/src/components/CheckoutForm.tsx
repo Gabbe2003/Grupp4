@@ -78,7 +78,7 @@ export default function CheckoutForm() {
   };
 
   const paymentElementOptions = {
-    layout: "tabs",
+    layout: "tabs" as "tabs",
   };
   return (
     <form id="payment-form" onSubmit={HandleSubmit}>
