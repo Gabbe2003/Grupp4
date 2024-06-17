@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../scss/login.scss";
 import GoogleLoginComponent from "../components/GoogleLogin";
+import { useCookies } from "react-cookie";
 
 interface ILoginForm {
   identifier: string;
@@ -17,6 +18,7 @@ export const Login = () => {
   });
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [cookies, setCookies] = useCookies();
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -33,19 +35,21 @@ export const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const url = "http://localhost:9000/loginUser";
-      const response = await axios.post(url, loginForm);
-      if (response.status === 200) {
-        console.log("Login successful:", response.data);
-        console.log(response);
-        alert("Login successful!");
-        navigate("/");
+    if (cookies) {
+      try {
+        const url = "http://localhost:9000/loginUser";
+        const response = await axios.post(url, loginForm);
+        if (response.status === 200) {
+          const user = response.data.foundUser;
+          setCookies("user", user, { path: "/" });
+          navigate("/");
+        }
+      } catch (error: any) {
+        console.error(error);
+        setError(
+          "Failed to login. Please check your credentials and try again."
+        );
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.error(error);
-      setError("Failed to login. Please check your credentials and try again.");
     }
   };
   const handleGoogleLoginSuccess = async (googleUser: any) => {
@@ -59,6 +63,8 @@ export const Login = () => {
       const response = await axios.post(url, googleLoginData);
       if (response.status === 200) {
         console.log("Google login successful:", response.data);
+
+        console.log(response.data);
         alert("Google Login successful!");
         navigate("/");
       }
