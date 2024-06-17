@@ -13,8 +13,12 @@ router.use(express.json());//som ovan
 
 router.get('/getAllMovies', allMovies.getAllMovies);
 router.get('/getAllMovies/:movieId', getOneMovie.getMovieById);
+router.get('/getAllMovies?page=2',allMovies.getAllMovies);
 router.post('/registerUser', registerUser.registerUser);
 router.post('/loginUser', loginUser.loginUser);
+
+
+
 
 const calculateOrderAmount = (items) => {
   if (items.length  ==  0) return 100 * 100

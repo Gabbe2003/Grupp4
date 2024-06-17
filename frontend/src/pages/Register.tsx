@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import axios from 'axios';
-import '../scss/register.scss';
-import { useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useState } from "react";
+import axios from "axios";
+import "../scss/register.scss";
+import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface IUser {
   id: string;
@@ -23,10 +23,10 @@ export const Register = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
   const [registerForm, setRegisterForm] = useState<IRegisterUserForm>({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const navigate = useNavigate();
 
@@ -43,18 +43,27 @@ export const Register = () => {
       setError("Passwords do not match!");
       return;
     }
-    if (!registerForm.username || !registerForm.email || !registerForm.password) {
+    if (
+      !registerForm.username ||
+      !registerForm.email ||
+      !registerForm.password
+    ) {
       setError("Please fill in all fields.");
       return;
     }
     try {
-      const url = 'http://localhost:9000/registerUser';
+      const url = "http://localhost:9000/registerUser";
       const response = await axios.post(url, registerForm);
       if (response.status === 201) {
         setUser(response.data);
-        setRegisterForm({ username: '', email: '', password: '', confirmPassword: '' });
+        setRegisterForm({
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
         alert("Registration successful!");
-        navigate('/loginUser');
+        navigate("/loginUser");
       } else {
         throw new Error(`Registration failed with status: ${response.status}`);
       }
@@ -66,9 +75,9 @@ export const Register = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setRegisterForm(prev => ({
+    setRegisterForm((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
   console.log(user);
@@ -81,23 +90,59 @@ export const Register = () => {
   return (
     <div className="register-container">
       <form onSubmit={handleSubmit} className="register-form">
-        <input type="text" name="username" value={registerForm.username} onChange={handleChange} placeholder="Username" required />
-        <input type="email" name="email" value={registerForm.email} onChange={handleChange} placeholder="Email" required />
-        
+        <input
+          type="text"
+          name="username"
+          value={registerForm.username}
+          onChange={handleChange}
+          placeholder="Username"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          value={registerForm.email}
+          onChange={handleChange}
+          placeholder="Email"
+          required
+        />
+
         <div className="password-input">
-          <input type={passwordShown ? "text" : "password"} name="password" value={registerForm.password} onChange={handleChange} placeholder="Password" required />
-          <button className="btn-toggle" onClick={togglePasswordVisibility} type="button">
+          <input
+            type={passwordShown ? "text" : "password"}
+            name="password"
+            value={registerForm.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+          />
+          <button
+            className="btn-toggle"
+            onClick={togglePasswordVisibility}
+            type="button"
+          >
             {passwordShown ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-        
+
         <div className="password-input">
-          <input type={confirmPasswordShown ? "text" : "password"} name="confirmPassword" value={registerForm.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required />
-          <button className="btn-toggle" onClick={toggleConfirmPasswordVisibility} type="button">
+          <input
+            type={confirmPasswordShown ? "text" : "password"}
+            name="confirmPassword"
+            value={registerForm.confirmPassword}
+            onChange={handleChange}
+            placeholder="Confirm Password"
+            required
+          />
+          <button
+            className="btn-toggle"
+            onClick={toggleConfirmPasswordVisibility}
+            type="button"
+          >
             {confirmPasswordShown ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-        
+
         <button type="submit">Register</button>
       </form>
       {error && <p className="error-message">{error}</p>}

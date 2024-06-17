@@ -19,7 +19,7 @@ app.use(morgan("tiny"));
 
 const movies = require('./models/movies');
 const user = require('./models/user');
-// const data = require('./models/dummyData');
+
 
 const dummyData = [
   { name: "Inception",desc:"A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",img:"https://m.media-amazon.com/images/I/71SBgi0X2KL._AC_UF1000,1000_QL80_.jpg",price: 129 },

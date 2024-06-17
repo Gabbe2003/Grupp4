@@ -13,8 +13,10 @@ const loginUser = async (req, res) => {
             $or: [ 
                 { email: identifier }, 
                 { username: identifier } 
-            ]
+            ],
+           
         }).exec();
+        
         
         if (!foundUser) {
             return res.status(401).json({ 'message':  'User not found' });
@@ -26,7 +28,7 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ 'message': 'Wrong credentials, try again!' });
         }
 
-        res.json({ success: true, message: "Login successful" });
+        res.json({ success: true, message: "Login successful",foundUser });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error while trying to verify login details' });
