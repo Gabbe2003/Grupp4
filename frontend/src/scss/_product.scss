@@ -39,16 +39,16 @@
           color: #555;
         }
         a {
-          color: black;
-          border-style: solid;
-          border-width: 1px 1px 1px 1px;
           text-decoration: none;
-          padding: 4px;
-          border-color: v.$color-darkblue;
-          background: v.$color-blue;
+          color: black;
+          cursor: pointer;
+          padding-top: 15px;
+          &:hover {
+            text-decoration: underline;
+          }
         }
         .single-product__movie-poster {
-          width: 80%;
+          width: 40%;
           img {
             width: 100%;
           }

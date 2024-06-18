@@ -4,9 +4,7 @@ import CheckoutForm from "../components/CheckoutForm";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const stripePromise = loadStripe(
-  "pk_test_51PKxpqIc3QY8b29xeA2yWWLRyEeyGlTQABliLLt1q6KBKHhw6fsfes6gVZhNdz4ylR98qiHNdg3Z1uGck1nqgZJ500FKpnmySr"
-);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 export const Checkout = () => {
   const [clientSecret, setClientSecret] = useState("");
@@ -29,7 +27,7 @@ export const Checkout = () => {
   }, []);
 
   const appearance = {
-    theme: "stripe",
+    theme: "stripe" as "stripe",
   };
   const options = {
     clientSecret,
@@ -38,13 +36,16 @@ export const Checkout = () => {
 
   return (
     <>
-      <div className="App">
-        <h1>Checkout</h1>
-        {clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
-        )}
+      <div className="checkout">
+        <div className="App">
+          <h1>Checkout</h1>
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
+        </div>
+        <a href="/">Back to start</a>
       </div>
     </>
   );
