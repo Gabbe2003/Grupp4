@@ -1,5 +1,3 @@
-// GoogleLoginComponent.tsx
-
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 
