@@ -55,18 +55,22 @@ export const Startpage = () => {
             <a href="/registerUser">Create account</a>
           </div>
         )}
-
-        {user ||
-          (googleUser && (
-            <div>
-              <a href="/" onClick={handleLogOut}>
-                Log out
-              </a>
-            </div>
-          ))}
+        {user && (
+          <div>
+            <a href="/" onClick={handleLogOut}>
+              Log out
+            </a>
+          </div>
+        )}
+        {googleUser && (
+          <div>
+            <a href="/" onClick={handleLogOut}>
+              Log out
+            </a>
+          </div>
+        )}
         <h1>Welcome {user && user.username}</h1>
         <h2>Movies</h2>
-
         <div className="movie-container">
           {movies?.map((movie) => {
             return (
