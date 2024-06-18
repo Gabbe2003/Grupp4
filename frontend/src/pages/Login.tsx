@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../scss/login.scss";
-import GoogleLoginComponent from "../components/GoogleLogin";
+import GoogleLoginComponent from "../components/GoogleLoginComponent";
 import { useCookies } from "react-cookie";
 
 interface ILoginForm {
@@ -21,6 +21,16 @@ export const Login = () => {
   const [cookies, setCookies] = useCookies();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const checkUserLogin = async () => {
+      if (cookies.user) {
+        navigate("/");
+      }
+    };
+
+    checkUserLogin();
+  }, [cookies.user, navigate]);
+
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
   };
@@ -33,47 +43,46 @@ export const Login = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (cookies) {
-      try {
-        const url = "http://localhost:9000/loginUser";
-        const response = await axios.post(url, loginForm);
-        if (response.status === 200) {
-          const user = response.data.foundUser;
-          setCookies("user", user, { path: "/" });
-          navigate("/");
-        }
-      } catch (error: any) {
-        console.error(error);
-        setError(
-          "Failed to login. Please check your credentials and try again."
-        );
-      }
-    }
-  };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleGoogleLoginSuccess = async (googleUser: any) => {
+  const handleLogin = async (userData: ILoginForm) => {
     try {
-      const profile = googleUser.getBasicProfile();
-      const googleLoginData = {
-        identifier: profile.getEmail(),
-        password: "",
-      };
       const url = "http://localhost:9000/loginUser";
-      const response = await axios.post(url, googleLoginData);
+      const response = await axios.post(url, userData);
       if (response.status === 200) {
-        console.log("Google login successful:", response.data);
-
-        console.log(response.data);
-        alert("Google Login successful!");
+        const user = response.data.foundUser;
+        setCookies("user", user, { path: "/" });
+        localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
-      setError("Failed to login with Google.");
+      setError("Failed to login. Please check your credentials and try again.");
     }
+  };
+  const handleGoogleLoginSuccess = async (response: any) => {
+    console.log("Google login response:", response);
+    if (response.credential) {
+      const tokenId = response.credential;
+      try {
+        const url = "http://localhost:9000/google-login";
+        const responseFromServer = await axios.post(url, { tokenId });
+        console.log("Server response:", responseFromServer);
+        if (responseFromServer.status === 200) {
+          const { token } = responseFromServer.data;
+          localStorage.setItem("token", token);
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Google login failed:", error);
+        setError("Failed to login with Google.");
+      }
+    } else {
+      setError("Google login failed: No credential received.");
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleLogin(loginForm);
   };
 
   return (
@@ -106,7 +115,10 @@ export const Login = () => {
         </div>
         <button type="submit">Login</button>
         <div className="google-container">
-          <GoogleLoginComponent onSuccess={handleGoogleLoginSuccess} />
+          <GoogleLoginComponent
+            onSuccess={handleGoogleLoginSuccess}
+            onFailure={(error) => console.error(error)}
+          />
         </div>
       </form>
       {error && <p className="error-message">{error}</p>}
