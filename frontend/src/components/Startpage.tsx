@@ -11,6 +11,7 @@ export const Startpage = () => {
   const [cart, setCart] = useState<any>([]);
   const cookie = new Cookies();
   const user = cookie.get("user");
+  const googleUser = cookie.get("token");
   useEffect(() => {
     console.log(page);
 
@@ -30,6 +31,7 @@ export const Startpage = () => {
   };
   const handleLogOut = () => {
     cookie.remove("user");
+    cookie.remove("token");
   };
   const previousPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -47,20 +49,21 @@ export const Startpage = () => {
   return (
     <div className="layout-container">
       <div className="header-container">
-        {!user && (
+        {!user && !googleUser && (
           <div className="login-register-container">
             <a href="/loginUser">Log in</a>
             <a href="/registerUser">Create account</a>
           </div>
         )}
 
-        {user && (
-          <div>
-            <a href="/" onClick={handleLogOut}>
-              Log out
-            </a>
-          </div>
-        )}
+        {user ||
+          (googleUser && (
+            <div>
+              <a href="/" onClick={handleLogOut}>
+                Log out
+              </a>
+            </div>
+          ))}
         <h1>Welcome {user && user.username}</h1>
         <h2>Movies</h2>
 

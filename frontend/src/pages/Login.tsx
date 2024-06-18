@@ -69,6 +69,7 @@ export const Login = () => {
         if (responseFromServer.status === 200) {
           const { token } = responseFromServer.data;
           localStorage.setItem("token", token);
+          setCookies("token", token, { path: "/" });
           navigate("/");
         }
       } catch (error) {
