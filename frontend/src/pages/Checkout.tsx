@@ -36,13 +36,16 @@ export const Checkout = () => {
 
   return (
     <>
-      <div className="App">
-        <h1>Checkout</h1>
-        {clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
-        )}
+      <div className="checkout">
+        <div className="App">
+          <h1>Checkout</h1>
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
+        </div>
+        <a href="/">Back to start</a>
       </div>
     </>
   );

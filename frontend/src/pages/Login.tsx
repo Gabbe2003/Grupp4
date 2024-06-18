@@ -69,7 +69,7 @@ export const Login = () => {
         alert("Google Login successful!");
         navigate("/");
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
       setError("Failed to login with Google.");
@@ -77,39 +77,43 @@ export const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="text"
-          name="identifier"
-          value={loginForm.identifier}
-          onChange={handleChange}
-          placeholder="Username or Email"
-          required
-        />
-        <div className="password-input">
+    <div className="login">
+      <h1>Logga in</h1>
+      <div className="login-container">
+        <form onSubmit={handleSubmit} className="login-form">
           <input
-            type={passwordShown ? "text" : "password"}
-            name="password"
-            value={loginForm.password}
+            type="text"
+            name="identifier"
+            value={loginForm.identifier}
             onChange={handleChange}
-            placeholder="Password"
+            placeholder="Username or Email"
             required
           />
-          <button
-            className="btn-toggle"
-            onClick={togglePasswordVisibility}
-            type="button"
-          >
-            {passwordShown ? <FaEyeSlash /> : <FaEye />}
-          </button>
-        </div>
-        <button type="submit">Login</button>
-        <div className="google-container">
-          <GoogleLoginComponent onSuccess={handleGoogleLoginSuccess} />
-        </div>
-      </form>
-      {error && <p className="error-message">{error}</p>}
+          <div className="password-input">
+            <input
+              type={passwordShown ? "text" : "password"}
+              name="password"
+              value={loginForm.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+            />
+            <button
+              className="btn-toggle"
+              onClick={togglePasswordVisibility}
+              type="button"
+            >
+              {passwordShown ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+          <button type="submit">Login</button>
+          <div className="google-container">
+            <GoogleLoginComponent onSuccess={handleGoogleLoginSuccess} />
+          </div>
+        </form>
+        {error && <p className="error-message">{error}</p>}
+        <a href="/">Back to start</a>
+      </div>
     </div>
   );
 };

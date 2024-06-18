@@ -2,8 +2,8 @@ export const Thanks = () => {
   return (
     <>
       <div className="thanks-container">
-        <h2>Tack för ditt köp!</h2>
-        <a href="/">Tillbaka till startsidan</a>
+        <h2>Thank you for your purchase</h2>
+        <a href="/">Back to start</a>
       </div>
     </>
   );

@@ -10,11 +10,16 @@
   flex-direction: column;
   row-gap: 10px;
   align-items: center;
+  a:hover {
+    text-decoration: underline;
+  }
 
   .login-register-container {
-    width: 30%;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    gap: 10px;
   }
   .header-container {
     width: 90%;
@@ -48,6 +53,13 @@
       .product-button {
         width: 60%;
       }
+    }
+    .btn-container {
+      width: 30%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-evenly;
     }
   }
 }
@@ -88,7 +100,7 @@
     color: #555;
   }
   .movie-poster {
-    width: 60%;
+    width: 40%;
     img {
       width: 100%;
     }
