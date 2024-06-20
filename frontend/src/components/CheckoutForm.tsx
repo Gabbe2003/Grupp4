@@ -19,7 +19,7 @@ export default function CheckoutForm() {
     }
 
     const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
+      "sk_test_51ORIuKDMAJfhpN1Ea1GZEZkPVWWWft4oE0FlcMm3Xq0OnPFLNNZ1zaRULQFj7Yf2kpFnOCOIbEuaCKTYa5zApM8H00jG1SeAcx"
     );
 
     if (!clientSecret) {

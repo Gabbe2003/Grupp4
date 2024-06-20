@@ -47,6 +47,7 @@ const dummyUsers = [
 const initializeDummyData = async () => {
   try {
     const count = await movies.countDocuments({});
+    const deleter = await movies.deleteMany({})
 
       if (count === 0) {
           await movies.insertMany(dummyData);

@@ -14,12 +14,13 @@ export const ProductPresentation = ({ movie }: IMoviePresentationProps) => {
         <div className="movie-item">
           <h3>{movie.name}</h3>
           <div className="movie-poster">
-            <img src={movie.img} />
+            <img src={movie.img} alt="No image is provided" />
           </div>
           <p>Pris: {movie.price} SEK</p>
           <button
             className="product-button"
             onClick={() => {
+              console.log(movie);
               navigate("/product/" + movie._id);
             }}
           >
