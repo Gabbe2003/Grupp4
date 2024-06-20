@@ -11,6 +11,7 @@ export const Startpage = () => {
   const [cart, setCart] = useState<any>([]);
   const cookie = new Cookies();
   const user = cookie.get("user");
+  const googleUser = cookie.get("token");
   useEffect(() => {
     console.log(page);
 
@@ -30,62 +31,69 @@ export const Startpage = () => {
   };
   const handleLogOut = () => {
     cookie.remove("user");
+    cookie.remove("token");
   };
   const previousPage = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (page > 1) {
       setPage(Number(page) - 1);
     }
   };
   const nextPage = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     if (page < totalPages) {
       setPage(Number(page) + 1);
     }
   };
+
   return (
     <div className="layout-container">
       <div className="header-container">
-        {!user && (
+        {!user && !googleUser && (
           <div className="login-register-container">
-            <a href="/loginUser">Logga in</a>
-            <a href="/registerUser">Skapa konto</a>
+            <a href="/loginUser">Log in</a>
+            <a href="/registerUser">Create account</a>
           </div>
         )}
-
         {user && (
           <div>
             <a href="/" onClick={handleLogOut}>
-              Logga ut
+              Log out
             </a>
           </div>
         )}
-        <h1>Välkommen {user && user.username}</h1>
-        <h2>Filmer</h2>
-
+        {googleUser && (
+          <div>
+            <a href="/" onClick={handleLogOut}>
+              Log out
+            </a>
+          </div>
+        )}
+        <h1>Welcome {user && user.username}</h1>
+        <h2>Movies</h2>
         <div className="movie-container">
           {movies?.map((movie) => {
             return (
               <div className="product-container" key={movie._id}>
                 <ProductPresentation movie={movie} />
-                <button onClick={() => addToCart(movie)}>
-                  Lägg i kundvagn
-                </button>
+                <button onClick={() => addToCart(movie)}>Buy</button>
               </div>
             );
           })}
         </div>
         <div className="btn-container">
-          <button onClick={previousPage}>Tillbaka</button>
-          <button onClick={() => nextPage()}>Nästa sida</button>
+          <button onClick={previousPage}>Previous</button>
+          <button onClick={() => nextPage()}>Next</button>
         </div>
       </div>
       <div className="cart">
-        <h1>Kundvagn</h1>
+        <h1>Cart</h1>
         {cart && cart.length > 0 ? (
           cart.map((movie: IMovie) => {
             return <Cart key={movie.name} movie={movie} />;
           })
         ) : (
-          <p>Kundvagnen är tom</p>
+          <p>Cart is empty</p>
         )}
 
         <a
@@ -93,10 +101,10 @@ export const Startpage = () => {
           href={
             cart && cart.length > 0
               ? `/checkout?products=` + JSON.stringify(cart)
-              : "/checkout"
+              : "/"
           }
         >
-          Betala
+          Check out
         </a>
       </div>
     </div>

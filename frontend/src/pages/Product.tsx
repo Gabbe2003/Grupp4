@@ -36,10 +36,10 @@ export const Product = () => {
               <div className="single-product__movie-poster">
                 <img src={movie.img} />
               </div>
-              <h4>{movie.name}</h4>
+              <h4>Plot</h4>
               <p>{movie.desc}</p>
-              <h4>Pris: {movie.price} SEK</h4>
-              <a href="/">Tillbaka till startsidan</a>
+              <h4>Price: {movie.price} SEK</h4>
+              <a href="/">Back to start</a>
             </div>
           </div>
         </div>

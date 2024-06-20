@@ -88,64 +88,68 @@ export const Register = () => {
   };
 
   return (
-    <div className="register-container">
-      <form onSubmit={handleSubmit} className="register-form">
-        <input
-          type="text"
-          name="username"
-          value={registerForm.username}
-          onChange={handleChange}
-          placeholder="Username"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={registerForm.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-        />
-
-        <div className="password-input">
+    <div className="register">
+      <h1>Register</h1>
+      <div className="register-container">
+        <form onSubmit={handleSubmit} className="register-form">
           <input
-            type={passwordShown ? "text" : "password"}
-            name="password"
-            value={registerForm.password}
+            type="text"
+            name="username"
+            value={registerForm.username}
             onChange={handleChange}
-            placeholder="Password"
+            placeholder="Username"
             required
           />
-          <button
-            className="btn-toggle"
-            onClick={togglePasswordVisibility}
-            type="button"
-          >
-            {passwordShown ? <FaEyeSlash /> : <FaEye />}
-          </button>
-        </div>
-
-        <div className="password-input">
           <input
-            type={confirmPasswordShown ? "text" : "password"}
-            name="confirmPassword"
-            value={registerForm.confirmPassword}
+            type="email"
+            name="email"
+            value={registerForm.email}
             onChange={handleChange}
-            placeholder="Confirm Password"
+            placeholder="Email"
             required
           />
-          <button
-            className="btn-toggle"
-            onClick={toggleConfirmPasswordVisibility}
-            type="button"
-          >
-            {confirmPasswordShown ? <FaEyeSlash /> : <FaEye />}
-          </button>
-        </div>
 
-        <button type="submit">Register</button>
-      </form>
-      {error && <p className="error-message">{error}</p>}
+          <div className="password-input">
+            <input
+              type={passwordShown ? "text" : "password"}
+              name="password"
+              value={registerForm.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+            />
+            <button
+              className="btn-toggle"
+              onClick={togglePasswordVisibility}
+              type="button"
+            >
+              {passwordShown ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+
+          <div className="password-input">
+            <input
+              type={confirmPasswordShown ? "text" : "password"}
+              name="confirmPassword"
+              value={registerForm.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm Password"
+              required
+            />
+            <button
+              className="btn-toggle"
+              onClick={toggleConfirmPasswordVisibility}
+              type="button"
+            >
+              {confirmPasswordShown ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+
+          <button type="submit">Register</button>
+          <a href="/">Back to start</a>
+        </form>
+        {error && <p className="error-message">{error}</p>}
+      </div>
     </div>
   );
 };

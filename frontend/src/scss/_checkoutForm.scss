@@ -132,3 +132,11 @@ button:disabled {
     min-width: initial;
   }
 }
+.checkout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
